@@ -1,11 +1,32 @@
 {% extends 'taskedapp/main.html' %}
 {% block content %}
 {% load static %}
-<div class="card-body">
-    <form method="POST">
-        {% csrf_token %}
-        {{form.as_p}}
-        <input class="button" type="submit" value="Login">
-        <a class="reg_reference" href="{% url 'register' %}" id="reg_reference">Нет учетной записи?</a>
-    </form>
+<div class="card-body auth_window">
+    <div class="auth_content">
+        <h3 class="auth_title">Авторизация</h3>
+        <form method="POST">
+            {% csrf_token %}
+            {% comment %} {{form.as_div}} {% endcomment %}
+            <div class="user_data_unit">
+                {% for field in form %}
+                    {{ field.errors }}
+                    <span class="user_data_title">
+                        {% if field.name == 'username' %}
+                            Логин:
+                        {% else %}
+                            {{ field.label_tag }}
+                        {% endif %}
+                    </span>
+                        {{ field }}
+                    {% comment %} {{ field.label_tag }} {{ field }} {% endcomment %}
+                    {% comment %} {% endif %} {% endcomment %}
+                {% endfor %}
+            </div>
+            <div class="auth_footer">
+                <input class="auth_enter" type="submit" value="Login">
+                <a class="reg_reference" href="{% url 'register' %}" id="reg_reference">Нет учетной записи?</a>
+            </div>
+        </form>
+    </div>
+</div>
 {% endblock content %}

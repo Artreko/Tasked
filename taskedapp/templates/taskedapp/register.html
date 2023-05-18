@@ -2,19 +2,28 @@
 {% block content %}
 {% load static %}
 
-<div class="reg_content">
-<h3 class="auth_title">Регистрация</h3>
-<div class="card-body user_data_unit">
-    <form method="POST">
-        {% csrf_token %}
-        {% for field in form %}
-        <div class="fieldWrapper">
-            {{ field.errors }}
-            {{ field.label_tag }} {{ field }}
+<div class="auth_window">
+    <div class="reg_content">
+    <h3 class="auth_title">Регистрация</h3>
+    <div class="card-body user_data_unit">
+        <form method="POST">
+            {% csrf_token %}
+            {% for field in form %}
+                {{ field.errors }}
+                <div class="user_data_title">
+                    {% if field.name == 'username' %}
+                        Логин:
+                    {% else %}
+                        {{ field.label_tag }}
+                    {% endif %}
+                </div>
+                    {{ field }}
+        {% endfor %}
+        </form>
+        <div class="reg_footer">
+            <input class="reg_enter" type="submit" value="Зарегистрироваться"/>
+            <a class="reg_reference" href="{% url 'login' %}">У вас уже есть аккунт?</a>
         </div>
-    {% endfor %}
-        <input style="margin-top:10px ;" class="button" type="submit" value="Зарегистрироваться">
-    </form>
-    <a href="{% url 'login' %}">У вас уже есть аккунт?</a>
+    </div>
+    {% endblock content %}
 </div>
-{% endblock content %}

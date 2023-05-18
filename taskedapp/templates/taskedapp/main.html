@@ -16,7 +16,7 @@
         <header>
             <div><a class ="title" href="{% url 'tasks' %}">tasked</a></div>
             {% if request.user.is_authenticated %}
-                <span id="username">#{{request.user}}</span>
+                <span id="username">{{request.user|upper}}</span>
             {% endif %}
             <div class="auth">
                 {% if request.user.is_authenticated %}
@@ -26,11 +26,8 @@
                 {% endif %}
             </div>
         </header>
-        <div class="container">
-            {% block content %} {% endblock content %}
-        </div>
     </div>
-
-
-
+    <div class="container">
+        {% block content %} {% endblock content %}
+    </div>
 </body>
