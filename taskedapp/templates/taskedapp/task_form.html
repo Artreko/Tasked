@@ -1,0 +1,14 @@
+{% extends 'taskedapp/main.html' %}
+{% block content %}
+{% load static %}
+<a href="{% url 'tasks' %}">&#8592; Back</a>
+
+<div class="card-body">
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{form.as_p}}
+        <input class="button" type="submit" value="Submit">
+    </form>
+</div>
+
+{% endblock content %}

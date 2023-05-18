@@ -1,0 +1,25 @@
+{% extends 'taskedapp/main.html' %}
+{% block content %}
+{% load static %}
+
+<div class="reg_content">
+<h3 class="auth_title">Регистрация</h3>
+<div class="card-body user_data_unit">
+    <form method="POST">
+        {% csrf_token %}
+        <label class="user_data_title">{{form.username.label}}</label>
+        {{form.username}}
+
+        <label class="user_data_title">{{from.email.label}}</label>
+        {{form.email}}
+
+        <label class="user_data_title">{{form.password1.label}}</label>
+        {{form.password1}}
+
+        <label class="user_data_title">{{form.password2.label}}</label>
+        {{form.password2}}
+        <input style="margin-top:10px ;" class="button" type="submit" value="Зарегистрироваться">
+    </form>
+    <a href="{% url 'login' %}">У вас уже есть аккунт?</a>
+</div>
+{% endblock content %}
