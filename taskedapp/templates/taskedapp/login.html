@@ -6,24 +6,21 @@
         <h3 class="auth_title">Авторизация</h3>
         <form method="POST">
             {% csrf_token %}
-            {% comment %} {{form.as_div}} {% endcomment %}
             <div class="user_data_unit">
-                {% for field in form %}
-                    {{ field.errors }}
-                    <span class="user_data_title">
-                        {% if field.name == 'username' %}
-                            Логин:
-                        {% else %}
-                            {{ field.label_tag }}
-                        {% endif %}
-                    </span>
-                        {{ field }}
-                    {% comment %} {{ field.label_tag }} {{ field }} {% endcomment %}
-                    {% comment %} {% endif %} {% endcomment %}
-                {% endfor %}
+                {{form.username.errors}}
+                <span class="user_data_title">
+                    Логин
+                </span>
+                {{ form.username }}
+                {{ form.password.errors }}
+                <span class="user_data_title">
+                    {{ form.password.label }}
+                </span>
+                {{ form.password }}
+
             </div>
             <div class="auth_footer">
-                <input class="auth_enter" type="submit" value="Login">
+                <input class="auth_enter" type="submit" value="Войти">
                 <a class="reg_reference" href="{% url 'register' %}" id="reg_reference">Нет учетной записи?</a>
             </div>
         </form>

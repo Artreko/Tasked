@@ -15,14 +15,14 @@
             </div>
             <div class="task_unit_main">
                 <p class="task_description">{{task.description}}</p>
-                <li class="task_ops">
+                <div class="task_ops">
                     <a class="edit-link" href="{% url 'task-edit' task.id %}">
                         <div class="icon edit_icon"></div>
                     </a>
                     <a class="delete-link" href="{% url 'task-delete' task.id %}">
                         <div class="icon delete_icon"></div>
                     </a>
-                </li>
+                </div>
             </div>
         </div>
     </div>

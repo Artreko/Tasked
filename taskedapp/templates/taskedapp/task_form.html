@@ -6,8 +6,18 @@
 <div class="card-body">
     <form method="POST" action="">
         {% csrf_token %}
-        {{form.as_div}}
-        <input class="button" type="submit" value="Submit">
+        <div class="task_unit">
+            <div class="task_header">
+                <h2 class="task_title">Задача {{form.title}}</h2>
+                <h2 class="task_check">{{form.complete}}</h2>
+                <h2 class="task_date">{{form.deadline.label}} {{form.deadline}}</h2>
+            </div>
+            <div class="task_unit_main">
+                <p>{{form.description.label}}</p>
+                <p class="task_description">{{form.description}}</p>
+            </div>
+            <input class="button" type="submit" value="Подтвердить">
+        </div>
     </form>
 </div>
 
