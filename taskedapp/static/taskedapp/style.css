@@ -1,3 +1,4 @@
+
 body {
     background: #e0e8ff;
     margin: 0;
@@ -29,6 +30,9 @@ a {
     text-decoration: none;
 }
 
+.ops_icon {
+    width: 25px;
+}
 
 .title {
     font-family: 'Inter', normal;
@@ -42,13 +46,23 @@ a {
     text-decoration: none;
 }
 
-.auth {
-    padding-right: 20px;
+.login_logout_ref {
+    font-family: 'Inter', normal;
+    font-size: 20px;
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 24px;
+    margin-right: 40px;
+
+    color: #000;
 }
 
-.auth_button {
-    width: 25px;
-    padding-right: 40px;
+.login_logout_ref:hover {
+    text-decoration: underline;
+}
+
+.auth {
+    padding-right: 20px;
 }
 
 .main_unit {
@@ -64,8 +78,42 @@ a {
     width: 25px;
     height: 25px;
     margin-left: 48px;
-    border-radius: 100%;
+    border-radius: 50%;
+    /* background-color: #fff; */
 }
+
+.icon {
+    width: 25px;
+    height: 25px;
+    margin-bottom: 5px;
+}
+
+.add_icon {
+    background: url("/static/taskedapp/images/free-icon-font-add-3914248.svg");
+}
+
+.add_icon:hover {
+    background: url("/static/taskedapp/images/free-icon-font-add-3914208.svg");
+}
+
+.edit_icon {
+    background: url("/static/taskedapp/images/free-icon-font-pen-circle-10742923.svg");
+}
+
+.edit_icon:hover {
+    background: url("/static/taskedapp/images/free-icon-font-pen-circle-10742911.svg");
+}
+
+.delete_icon {
+    background: url("/static/taskedapp/images/free-icon-font-cross-circle-3917206.svg");
+    border-radius: 50%;
+}
+
+.delete_icon:hover {
+    background: url("/static/taskedapp/images/free-icon-font-cross-circle-3917211.svg");
+}
+
+/* C:\Projects\Tasked\taskedapp\static\taskedapp\images\free-icon-font-add-3914208.svg */
 
 .task_unit {
     margin-right:10%;
@@ -135,6 +183,7 @@ a {
     margin-left: 18px;
     width: 91%;
     height: 50px;
+    word-wrap: break-word;
 }
 
 .task_ops {
@@ -356,16 +405,3 @@ task-complete-icon img {
     background-color: #5cb85c;
     color: white;
   }
-
-.delete-icon {
-    width: 25px;
-    height: 25px;
-    background-color: rgb(255, 102, 0);
-    border-radius: 50%;
-    display: flex;
-}
-.delete-icon img {
-    justify-content: center;
-    margin: auto;
-    width: 12px;
-}

@@ -2,9 +2,12 @@
 {% block content %}
 {% load static %}
 <div id="tasklist" class="task-items-wrapper">
-    <a href="{% url 'task-create' %}">Add</a>
     {% for task in tasks %}
     <div class="main_unit">
+    <a class="add_task_button" href="{% url 'task-create' %}">
+        <div class="icon add_icon"></div>
+        {% comment %} <img class="add_icon" src="{% static 'taskedapp/images/free-icon-font-add-3914248.svg' %}"> {% endcomment %}
+    </a>
         <div class="task_unit">
             <div class="task_header">
                 <h2 class="task_title">{{task}}</h2>
@@ -13,14 +16,11 @@
             <div class="task_unit_main">
                 <p class="task_description">{{task.description}}</p>
                 <li class="task_ops">
-                    <div class="task-complete-icon">
-                        <img src="{% static 'taskedapp/images/fi-sr-check.svg' %}">
-                    </div>
-                    <a class="edit-link" href="{% url 'task-edit' task.id %}">Edit</a>
+                    <a class="edit-link" href="{% url 'task-edit' task.id %}">
+                        <div class="icon edit_icon"></div>
+                    </a>
                     <a class="delete-link" href="{% url 'task-delete' task.id %}">
-                        <div class="delete-icon">
-                            <img src="{% static 'taskedapp/images/fi-sr-trash.svg' %}">
-                        </div>
+                        <div class="icon delete_icon"></div>
                     </a>
                 </li>
             </div>
