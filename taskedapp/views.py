@@ -15,7 +15,7 @@ from django.shortcuts import redirect
 from django.db import transaction
 
 from .models import Task
-from .forms import PositionForm
+from .forms import PositionForm, SignupForm
 
 
 class CustomLoginView(LoginView):
@@ -29,7 +29,7 @@ class CustomLoginView(LoginView):
 
 class RegisterPage(FormView):
     template_name = 'taskedapp/register.html'
-    form_class = UserCreationForm
+    form_class = SignupForm
     redirect_authenticated_user = True
     success_url = reverse_lazy('tasks')
 
@@ -66,7 +66,7 @@ class TaskList(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    fields = ['title', 'description', 'complete', 'deadline']
     success_url = reverse_lazy('tasks')
 
     def form_valid(self, form):
@@ -76,7 +76,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskEdit(LoginRequiredMixin, UpdateView):
     model = Task
-    fields = ['title', 'description', 'complete']
+    fields = ['title', 'description', 'complete', 'deadline']
     success_url = reverse_lazy('tasks')
 
 
