@@ -140,21 +140,20 @@ a {
 .task_ops {
     display: flex;
     flex-direction: column;
-
     margin-top: 10px;
     margin-right: 18px;
 }
 
-/* .task-complete-icon {
+.task-complete-icon {
     width: 20px;
     height: 20px;
     border-radius: 50%;
     background-color: #5cb85c;
 }
-.task-complete-icon img {
+task-complete-icon img {
     width: 19px;
     height: 19px; 
-} */
+}
 
 .ops_buttons {
     margin-bottom: 5px;
@@ -357,3 +356,16 @@ a {
     background-color: #5cb85c;
     color: white;
   }
+
+.delete-icon {
+    width: 25px;
+    height: 25px;
+    background-color: rgb(255, 102, 0);
+    border-radius: 50%;
+    display: flex;
+}
+.delete-icon img {
+    justify-content: center;
+    margin: auto;
+    width: 12px;
+}

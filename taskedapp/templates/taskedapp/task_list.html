@@ -13,8 +13,15 @@
             <div class="task_unit_main">
                 <p class="task_description">{{task.description}}</p>
                 <li class="task_ops">
+                    <div class="task-complete-icon">
+                        <img src="{% static 'taskedapp/images/fi-sr-check.svg' %}">
+                    </div>
                     <a class="edit-link" href="{% url 'task-edit' task.id %}">Edit</a>
-                    <a class="delete-link" href="{% url 'task-delete' task.id %}">Delete</a>
+                    <a class="delete-link" href="{% url 'task-delete' task.id %}">
+                        <div class="delete-icon">
+                            <img src="{% static 'taskedapp/images/fi-sr-trash.svg' %}">
+                        </div>
+                    </a>
                 </li>
             </div>
         </div>
@@ -22,7 +29,8 @@
     {% empty %}
     <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
         <h3>No new tasks are created.</h3>
-        <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'task-create' %}">New task</a> ! </h3>
+        <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'task-create' %}">New task</a> !
+        </h3>
     </div>
     {% endfor %}
 </div>
