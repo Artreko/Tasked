@@ -10,9 +10,9 @@
         <form method="POST" action="">
             {% csrf_token %}
             <div class="task_header">
-                <h2>{{form.title}}</h2>
-                <h2 class="task_check">{{form.complete}}</h2>
-                <h2 class="task_date">{{form.deadline.label}} {{form.deadline}}</h2>
+                <h2 class="task-title">{{form.title}}</h2>
+                <h2 class="task-check">{{form.complete}}</h2>
+                <h2 class="task_date">{{form.deadline.label_tag}} {{form.deadline}}</h2>
             </div>
             <div class="task_unit_main">
                 {{form.description}}

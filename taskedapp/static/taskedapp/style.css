@@ -227,7 +227,7 @@ a {
     height: 34px;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: stretch;
     align-items: center;
 
     padding-bottom: 5px;
@@ -264,7 +264,9 @@ a {
 
 .task-title {
     margin-left: 18px;
-
+}
+.task-title-input , .date-class
+{
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
@@ -289,6 +291,7 @@ a {
     font-weight: 600;
     font-size: 16px;
     color: #333333;
+    margin-left: auto;
 }
 
 .task_unit_main {
@@ -578,4 +581,17 @@ a {
 }
 .form-errors.errorlist li::after {
     content: " • ";
+}
+
+.task-check{
+    margin: 0;
+    height: 30px;
+}
+
+#id_complete{
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    margin-top: 5.5px;
+    margin-left: 10px;
 }

@@ -28,7 +28,7 @@ class TaskForm(forms.ModelForm):
         widgets = {
             'title': forms.TextInput(
                 attrs={
-                'class': 'task-title',
+                'class': 'task-title-input',
                 'type': 'text',
                 'placeholder': 'Название',
                 }
@@ -62,7 +62,7 @@ class UpdateTaskForm(TaskForm):
         if data:
             current_date = self.instance.deadline
             if current_date:
-                current_date = currend_date.date()
+                current_date = current_date.date()
                 today = date.today()
                 if current_date < today and data< current_date:
                     raise ValidationError(_("Неправильная дата - крайний срок не может быть раньше текущего"))
