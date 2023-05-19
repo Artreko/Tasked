@@ -3,25 +3,31 @@
 {% load static %}
 
 <div class="card-body">
-        <a href="{% url 'tasks' %}">
-            <div class="left_icon"></div>
-        </a>
-        <div class="task_unit_detail">
-            <form method="POST" action="">
-                {% csrf_token %}
-                <div class="task_header">
-                    <h2>{{form.title}}</h2>
-                    <h2 class="task_check">{{form.complete}}</h2>
-                    <h2 class="task_date">{{form.deadline.label}} {{form.deadline}}</h2>
-                </div>
-                <div class="task_unit_main">
-                    {{form.description}}
-                </div>
-                <div class="button_block">
+    <a href="{% url 'tasks' %}">
+        <div class="left_icon"></div>
+    </a>
+    <div class="task_unit_detail">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="task_header">
+                <h2>{{form.title}}</h2>
+                <h2 class="task_check">{{form.complete}}</h2>
+                <h2 class="task_date">{{form.deadline.label}} {{form.deadline}}</h2>
+            </div>
+            <div class="task_unit_main">
+                {{form.description}}
+            </div>
+            <div class="button_block">
                     <input class="submit_button" type="submit" value="Подтвердить">
-                </div>
-            </form>
-        </div>
+            </div>
+        </form>
+    </div>
+    <div class="form-errors" style="margin: 10px 20%;
+    color: rgba(255, 117, 117, 0.904);">
+        {{ form.title.errors }}
+        {{ form.description.errors }}
+        {{ form.deadline.errors }}
+    </div>
 </div>
 
 {% endblock content %}

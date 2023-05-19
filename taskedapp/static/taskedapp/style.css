@@ -238,7 +238,7 @@ a {
     background-color: rgb(235, 233, 233);
 }
 
-.task_header::after {
+/* .task_header::after {
     content: "";
     background: #333333;
     width: 95.5%;
@@ -246,7 +246,7 @@ a {
     margin-top: 42px;
     margin-left: 2.25%;
     position: absolute;
-}
+} */
 
 .task_title {
     margin-left: 18px;
@@ -563,4 +563,19 @@ a {
 #add_task_button {
     margin: auto;
     margin-bottom: 10px;
+}
+
+.form-errors{
+    margin: 10px 20%;
+    color: rgba(255, 117, 117, 0.904);
+}
+.form-errors.errorlist {
+    list-style: none;
+}
+
+.form-errors.errorlist li::before {
+    content: " • ";
+}
+.form-errors.errorlist li::after {
+    content: " • ";
 }

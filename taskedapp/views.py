@@ -17,7 +17,7 @@ from django.db import transaction
 from datetime import date
 
 from .models import Task
-from .forms import SignupForm, TaskForm
+from .forms import SignupForm, TaskForm, CreateTaskForm, UpdateTaskForm
 
 
 class CustomLoginView(LoginView):
@@ -66,7 +66,7 @@ class TaskList(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    form_class = TaskForm
+    form_class = CreateTaskForm
     success_url = reverse_lazy('tasks')
 
     def form_valid(self, form):
@@ -76,7 +76,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
 class TaskEdit(LoginRequiredMixin, UpdateView):
     model = Task
-    form_class = TaskForm
+    form_class = UpdateTaskForm
     # fields = ['title', 'description', 'complete', 'deadline']
     success_url = reverse_lazy('tasks')
 
