@@ -25,18 +25,25 @@ class TaskForm(forms.ModelForm):
         fields = ['title', 'complete', 'deadline', 'description', ]
         localized_fields = '__all__'
         widgets = {
+            'title': forms.TextInput(
+                attrs={
+                'class': 'task-title',
+                'type': 'text',
+                'placeholder': 'Название',
+                }
+            ),
             'deadline': forms.DateInput( attrs={
                 'class': 'date-class',
-                'type': 'date'
+                'type': 'date',
             }),
             'description': forms.Textarea(attrs={
                 'class': 'task-description',
-                'rows': 10, 'cols': 100
+                'placeholder': 'Описание',
                 })
         }
         labels = {
             'title': 'Название',
             'completed': 'Завершено',
             'description': 'Описание',
-            'deadline': 'Крайный срок',
+            'deadline': 'Крайний срок',
         }

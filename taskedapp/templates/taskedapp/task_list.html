@@ -7,7 +7,6 @@
     </a>
     {% for task in tasks %}
     <div class="main_unit">
-
         <div class="task_unit">
             <div class="task_header {% if task.complete %}complete{% endif %} {% if task in danger %}danger{% endif %}">
                 <h2 class="task_title">{{task}}</h2>
@@ -27,10 +26,9 @@
         </div>
     </div>
     {% empty %}
-    <div style="text-align: center; padding-bottom: 10px; line-height: 1em;">
-        <h3>No new tasks are created.</h3>
-        <h3>Create a <a style="text-decoration: none; color: #e53935;" href="{% url 'task-create' %}">New task</a> !
-        </h3>
+    <div class="no_tasks">
+        <h3>У вас еще нет задач</h3>
+        <h3>Создайте новую</h3>
     </div>
     {% endfor %}
 </div>

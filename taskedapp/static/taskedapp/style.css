@@ -6,6 +6,7 @@ body {
     width: 1050px;
     margin-left: auto;
     margin-right: auto;
+    /* box-sizing: border-box; */
 }
 
 header {
@@ -28,6 +29,20 @@ header {
 
 a {
     text-decoration: none;
+}
+
+.no_tasks {
+    font-family: 'Inter', normal;
+	font-size: 16px;
+    font-weight: 800;
+
+    color: #333333;
+    text-align: center; 
+}
+
+.no_tasks h3 {
+    margin-top: 20px;
+    margin-bottom: -10px; 
 }
 
 .ops_icon {
@@ -69,9 +84,6 @@ a {
 .main_unit {
     height: 100%;
     margin-top: 10px;
-    /* background-color: #333333; */
-    display: flex;
-    justify-content: space-between;
 }
 
 .add_task_button {
@@ -114,6 +126,25 @@ a {
     background: url("/static/taskedapp/images/free-icon-font-cross-circle-3917211.svg");
 }
 
+.left_icon {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 25px;
+    height: 25px;
+    background: url("/static/taskedapp/images/left_before.svg");    
+}
+
+.left_icon:hover {
+    margin: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 25px;
+    height: 25px;
+    background: url("/static/taskedapp/images/left_after.svg");    
+}
+
+
 #username {
     font-size: 25px;
 
@@ -121,6 +152,65 @@ a {
     font-size: 20px;
     font-weight: 800;
     font-size: 16px;
+    margin-left: 7px;
+}
+
+.card-body {
+    /* display: flex;
+    flex-direction: column; */
+}
+
+.middle_card {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.task_unit_detail {
+    margin-left: auto;
+    margin-right:auto;
+    width: 80%;
+    background-color: #FFFFFF;
+    border-radius: 5px;
+    border: solid #333333 1px;
+    position: relative;
+}
+
+.button_block {
+    height: 40px;
+    display: flex;
+    justify-content: right;
+}
+
+.submit_button {
+    width: 120px;
+    height: 32px;
+
+    background: #7CE7F5;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    margin-right: 18px;
+}
+
+.submit_button:hover {
+    background-color: #34e1f8;
+}
+
+.delete_button {
+    width: 80px;
+    height: 32px;
+    background: #7CE7F5;
+    border-radius: 5px;
+    border: none;
+    cursor: pointer;
+
+    margin-right: 18px;
+}
+
+.delete_button:hover {
+    background-color: #34e1f8;
 }
 
 .task_unit {
@@ -134,7 +224,7 @@ a {
 
 .task_header {
     width: 100%;
-    height: 35px;
+    height: 34px;
 
     display: flex;
     justify-content: space-between;
@@ -145,7 +235,7 @@ a {
     position: relative;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
-    background-color: lightgrey;
+    background-color: rgb(235, 233, 233);
 }
 
 .task_header::after {
@@ -164,9 +254,31 @@ a {
     font-family: 'Inter';
     font-style: normal;
     font-weight: 600;
-    font-size: 16px;
+    font-size: 18px;
+    height: 22px;
 
     color: #333333;
+    border-radius: 7px;
+    padding-left: 7px;
+}
+
+.task-title {
+    margin-left: 18px;
+
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    height: 22px;
+
+    color: #333333;
+    border-radius: 7px;
+    padding-left: 7px;
+    border: solid 1px #333333;
+}
+
+.task_title::after {
+    border: none;
 }
 
 .task_date {
@@ -193,9 +305,34 @@ a {
 
     margin-top: 10px;
     margin-left: 18px;
+
+    padding-left: 7px;
     width: 91%;
     min-height: 80px;
     word-wrap: break-word;
+}
+
+.task-description {
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+
+    min-height: 120px;
+    width: 94.7%;
+    word-wrap:break-word;
+    margin-top: 5px;
+    margin-left: 18px;
+    padding-top: 5px;
+    padding-left: 7px;
+    resize: none;
+    border: 1px solid #fff;
+    outline: none;
+    margin-bottom: 5px;
+}
+.task-description:focus {
+    border: 1px solid #333333;
+    border-radius: 7px;
 }
 
 .task_ops {
@@ -211,7 +348,8 @@ a {
     border-radius: 50%;
     background-color: #5cb85c;
 }
-task-complete-icon img {
+
+.task-complete-icon img {
     width: 19px;
     height: 19px; 
 }
@@ -413,7 +551,7 @@ task-complete-icon img {
     background-color: darkseagreen;
 }
 .danger {
-    background-color: red;
+    background-color: rgba(255, 117, 117, 0.904);
 }
 
 .task-items-wrapper {

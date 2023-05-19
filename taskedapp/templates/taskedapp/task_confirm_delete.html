@@ -1,13 +1,29 @@
 {% extends 'taskedapp/main.html' %}
 {% block content %}
 {% load static %}
-<a href="{% url 'tasks' %}">&#8592; Back</a>
 
 <div class="card-body">
-    <form method="POST" action="">
-        {% csrf_token %}
-        {{task}}
-        <input class="button" type="submit" value="Удалить">
-    </form>
+    {% comment %} <div class="middle_card"> {% endcomment %}
+        <a href="{% url 'tasks' %}">
+           <div class="left_icon"></div>
+        </a>
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="main_unit">
+                <div class="task_unit">
+                    <div class="task_header {% if task.complete %}complete{% endif %} {% if task in danger %}danger{% endif %}">
+                        <h2 class="task_title">{{task}}</h2>
+                        <h2 class="task_date">{{task.deadline|date}}</h2>
+                    </div>
+                    <div class="task_unit_main">
+                        <p class="task_description">{{task.description}}</p>
+                    </div>
+                    <div class="button_block">
+                        <input class="delete_button" type="submit" value="Удалить">
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
 {% endblock content %}
