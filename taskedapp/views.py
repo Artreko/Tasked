@@ -59,14 +59,7 @@ class TaskList(LoginRequiredMixin, ListView):
         context['tasks'] = context['tasks'].filter(user=self.request.user)
         uncompleted_tasks = context['tasks'].filter(complete=False)
         context['count'] = uncompleted_tasks.count()
-        context['danger'] = [task for task in uncompleted_tasks if task.deadline.date() <= date.today()]
-
-        # search_input = self.request.GET.get('search-area') or ''
-        # if search_input:
-        #     context['tasks'] = context['tasks'].filter(
-        #         title__contains=search_input)
-        #
-        # context['search_input'] = search_input
+        context['danger'] = [task for task in uncompleted_tasks if task.deadline and task.deadline.date() <= date.today()]
 
         return context
 
