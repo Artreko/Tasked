@@ -32,7 +32,7 @@ class TaskForm(forms.ModelForm):
                 'placeholder': 'Название',
                 }
             ),
-            'deadline': forms.DateInput( attrs={
+            'deadline': forms.DateInput(format='%Y-%m-%d', attrs={
                 'class': 'date-class',
                 'type': 'date',
             }),
