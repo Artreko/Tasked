@@ -14,6 +14,8 @@ from django.views import View
 from django.shortcuts import redirect
 from django.db import transaction
 
+from datetime import date
+
 from .models import Task
 from .forms import SignupForm, TaskForm
 
@@ -55,7 +57,9 @@ class TaskList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tasks'] = context['tasks'].filter(user=self.request.user)
-        context['count'] = context['tasks'].filter(complete=False).count()
+        uncompleted_tasks = context['tasks'].filter(complete=False)
+        context['count'] = uncompleted_tasks.count()
+        context['danger'] = [task for task in uncompleted_tasks if task.deadline.date() <= date.today()]
 
         # search_input = self.request.GET.get('search-area') or ''
         # if search_input:
@@ -69,7 +73,7 @@ class TaskList(LoginRequiredMixin, ListView):
 
 class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    fields = ['title', 'description', 'complete', 'deadline']
+    form_class = TaskForm
     success_url = reverse_lazy('tasks')
 
     def form_valid(self, form):

@@ -2,14 +2,14 @@
 {% block content %}
 {% load static %}
 <div id="tasklist" class="task-items-wrapper">
+    <a  class="add_task_button" id='add_task_button' href="{% url 'task-create' %}">
+        <div class="icon add_icon"></div>
+    </a>
     {% for task in tasks %}
     <div class="main_unit">
-    <a class="add_task_button" href="{% url 'task-create' %}">
-        <div class="icon add_icon"></div>
-        {% comment %} <img class="add_icon" src="{% static 'taskedapp/images/free-icon-font-add-3914248.svg' %}"> {% endcomment %}
-    </a>
+
         <div class="task_unit">
-            <div class="task_header">
+            <div class="task_header {% if task.complete %}complete{% endif %} {% if task in danger %}danger{% endif %}">
                 <h2 class="task_title">{{task}}</h2>
                 <h2 class="task_date">{{task.deadline|date}}</h2>
             </div>

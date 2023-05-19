@@ -41,7 +41,7 @@ a {
     font-size: 20px;
     line-height: 24px;
 
-    padding-left: 47px;
+    margin-left: 70px;
 
     text-decoration: none;
     color: #000;
@@ -53,7 +53,7 @@ a {
     font-weight: 800;
     font-size: 16px;
     line-height: 24px;
-    margin-right: 40px;
+    margin-right: 70px;
 
     color: #000;
 }
@@ -70,7 +70,6 @@ a {
     height: 100%;
     margin-top: 10px;
     /* background-color: #333333; */
-
     display: flex;
     justify-content: space-between;
 }
@@ -84,6 +83,7 @@ a {
 }
 
 .icon {
+    margin-top: 10px;
     width: 25px;
     height: 25px;
     margin-bottom: 5px;
@@ -124,6 +124,7 @@ a {
 }
 
 .task_unit {
+    margin-left: 10%;
     margin-right:10%;
     width: 80%;
     background-color: #FFFFFF;
@@ -142,6 +143,9 @@ a {
     padding-bottom: 5px;
 
     position: relative;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    background-color: lightgrey;
 }
 
 .task_header::after {
@@ -403,4 +407,22 @@ task-complete-icon img {
 
 .reg_enter:hover {
     background-color: #34e1f8;
+}
+
+.complete {
+    background-color: darkseagreen;
+}
+.danger {
+    background-color: red;
+}
+
+.task-items-wrapper {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+#add_task_button {
+    margin: auto;
+    margin-bottom: 10px;
 }
