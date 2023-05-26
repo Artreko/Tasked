@@ -180,12 +180,16 @@ a {
     height: 40px;
     display: flex;
     justify-content: right;
+
 }
 
 .submit_button {
     width: 120px;
     height: 32px;
-
+    font-family: 'Inter';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
     background: #7CE7F5;
     border-radius: 5px;
     border: none;
@@ -303,7 +307,7 @@ a {
 .task_description {
     font-family: 'Inter';
     font-style: normal;
-    font-weight: 400;
+    font-weight: 500;
     font-size: 14px;
 
     margin-top: 10px;

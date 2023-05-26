@@ -122,8 +122,6 @@ celerybeat.pid
 # Environments
 .env.db
 .env.secret
-.env.*
-.env
 .venv
 env/
 venv/
@@ -165,3 +163,4 @@ cython_debug/
 .env.db
 .env.db
 .gitignore
+
