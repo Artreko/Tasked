@@ -15,7 +15,7 @@ from django.shortcuts import redirect
 from django.db import transaction
 
 from datetime import date
-
+from operator import attrgetter
 from .models import Task
 from .forms import SignupForm, TaskForm, CreateTaskForm, UpdateTaskForm
 
@@ -59,9 +59,12 @@ class TaskList(LoginRequiredMixin, ListView):
         context = super().get_context_data(**kwargs)
         context['tasks'] = context['tasks'].filter(user=self.request.user)
         uncompleted_tasks = context['tasks'].filter(complete=False)
+        completed_tasks = context['tasks'].filter(complete=True)
         context['count'] = uncompleted_tasks.count()
-        context['danger'] = [task for task in uncompleted_tasks if task.deadline and task.deadline.date() <= date.today()]
-
+        uncompleted_tasks = sorted(uncompleted_tasks, key=attrgetter('deadline'))
+        context['danger'] = [task for task in uncompleted_tasks 
+                                if task.deadline and task.deadline.date() <= date.today()]
+        context['tasks'] = [*uncompleted_tasks, *completed_tasks]                 
         return context
 
 
