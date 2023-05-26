@@ -9,18 +9,22 @@
             <form method="POST">
                 {% csrf_token %}
                 {% for field in form %}
-                    {{ field.errors }}
                     <div class="user_data_title">
-                            {{ field.label }}
+                        {{ field.label }}
                     </div>
                         {{ field }}
+                        {% comment %} {{ field.errors }} {% endcomment %}
                 {% endfor %}
+                <div class="reg_footer">
+                    <input class="reg_enter" type="submit" value="Зарегистрироваться"/>
+                    <a class="reg_reference" href="{% url 'login' %}">У вас уже есть аккунт?</a>
+                </div>
             </form>
-            <div class="reg_footer">
-                <input class="reg_enter" type="submit" value="Зарегистрироваться"/>
-                <a class="reg_reference" href="{% url 'login' %}">У вас уже есть аккунт?</a>
-            </div>
         </div>
     </div>
+        {% for field in form %}
+            {{ field.errors }}
+        {% endfor %}
+
     {% endblock content %}
 </div>
