@@ -23,6 +23,7 @@ from .forms import SignupForm, TaskForm, CreateTaskForm, UpdateTaskForm
 class CustomLoginView(LoginView):
     template_name = 'taskedapp/login.html'
     fields = '__all__'
+    required_css_class = "field"
     redirect_authenticated_user = True
 
     # def get_context_data(self, **kwargs):

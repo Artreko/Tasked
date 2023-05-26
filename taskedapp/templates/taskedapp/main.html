@@ -27,7 +27,19 @@
             </div>
         </header>
     </div>
+    {% comment %} Автоматический переход на страницу аутентификации {% endcomment %}
+    {{ redirect_to_login_immediately }}
+
+    {% comment %} Вывод сообщений {% endcomment %}
+    
     <div class="container">
         {% block content %} {% endblock content %}
     </div>
+    <div class="messages">
+        {% for message in messages %}
+            <div class="message_{{ message.tags }}">
+                {{ message }}
+            </div>
+        {% endfor %}
+    </div> 
 </body>

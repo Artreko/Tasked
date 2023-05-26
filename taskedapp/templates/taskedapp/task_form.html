@@ -22,11 +22,18 @@
             </div>
         </form>
     </div>
-    <div class="form-errors" style="margin: 10px 20%;
-    color: rgba(255, 117, 117, 0.904);">
-        {{ form.title.errors }}
-        {{ form.description.errors }}
-        {{ form.deadline.errors }}
+    <div class="form-errors">
+        {% if form.title.errors %}
+        <div>{{ form.title.errors }}</div>
+        {% endif %}
+        
+        {% if form.description.errors %}
+            <div>{{ form.description.errors }}</div>
+        {% endif %}
+
+        {% if form.deadline.errors %}
+            <div>{{ form.deadline.errors }}</div>
+        {% endif %}
     </div>
 </div>
 
