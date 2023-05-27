@@ -60,7 +60,6 @@ class CreateTaskForm(TaskForm):
             raise ValidationError(_("Неправильная дата - крайний срок не может быть в прошлом"))
         return data
 
-
 class UpdateTaskForm(TaskForm):
     def clean_deadline(self):
         data = self.cleaned_data["deadline"]
@@ -68,8 +67,10 @@ class UpdateTaskForm(TaskForm):
             current_date = self.instance.deadline
             if current_date:
                 current_date = current_date.date()
-                today = date.today()
-                logger.info(f'{data}/{current_date}/{today}')
-                if current_date != data and data < today:
-                    raise ValidationError(_("Неправильная дата - крайний срок не может быть в прошлом"))
+            else:
+                current_date = date.today()
+            today = date.today()
+            logger.info(f'{data}/{current_date}/{today}')
+            if current_date != data and data < today:
+                raise ValidationError(_("Неправильная дата - крайний срок не может быть в прошлом"))
         return data   
