@@ -64,13 +64,13 @@ class TaskList(LoginRequiredMixin, ListView):
         uncompleted_tasks = context['tasks'].filter(complete=False)
         context['count'] = uncompleted_tasks.count()
         uncompleted_tasks = list(uncompleted_tasks)
-        logger.debug(f'{uncompleted_tasks}')
+        # logger.debug(f'{uncompleted_tasks}')
         tasks_no_deadline = []
         idx = 0
         while idx < len(uncompleted_tasks):
             task = uncompleted_tasks[idx]
-            logger.debug(f'{task} {task.deadline}')
-            if task.deadline == None:
+            # logger.debug(f'{task} {task.deadline}')
+            if not task.deadline:
                 tasks_no_deadline.append(task)
                 uncompleted_tasks.pop(idx)
                 idx -= 1
