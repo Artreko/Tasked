@@ -7,22 +7,24 @@
         <form method="POST">
             {% csrf_token %}
             <div class="user_data_unit">
-                {{form.username.errors}}
                 <span class="user_data_title">
                     Логин
                 </span>
                 {{ form.username }}
-                {{ form.password.errors }}
                 <span class="user_data_title">
                     {{ form.password.label }}
                 </span>
                 {{ form.password }}
             </div>
+            
             <div class="auth_footer">
                 <input class="button auth_enter" type="submit" value="Войти">
                 <a class="reg_reference" href="{% url 'register' %}" id="reg_reference">Нет учетной записи?</a>
             </div>
         </form>
     </div>
+    {{ form.non_field_errors }}
+    {{ form.password.errors }}
+    {{ form.username.errors }}
 </div>
 {% endblock content %}

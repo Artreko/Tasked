@@ -132,8 +132,10 @@ DATE_INPUT_FORMATS = ('%Y-%m-%d',)
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = 'static/'
-LOGIN_URL = 'login/'
+STATIC_URL = '/static/'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/login/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -159,6 +161,10 @@ LOGGING = {
             'format': '{levelname} {message}',
             'style': '{',
         },
+        'custom': {
+            'format': '{levelname} {asctime} {module} {message}',
+            'style': '{',
+        },
     },
     'filters': {
         'require_debug_true': {
@@ -167,10 +173,16 @@ LOGGING = {
     },
     'handlers': {
         'console': {
-            'level': 'INFO',
+            'level': 'DEBUG',
             'filters': ['require_debug_true'],
             'class': 'logging.StreamHandler',
             'formatter': 'verbose'
+        },
+        'file': {
+            'level': 'INFO',
+            'class': 'logging.FileHandler',
+            'formatter': 'custom',
+            'filename': 'log.log',
         },
     },
     'loggers': {
@@ -178,5 +190,10 @@ LOGGING = {
             'handlers': ['console'],
             'propagate': True,
         },
+        'taskedapp': {
+            'handlers': ['console', 'file'],
+            'level': 'DEBUG',
+            'propagate': True
+        }
     }
 }
