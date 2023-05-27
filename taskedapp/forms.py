@@ -3,9 +3,12 @@ from django.forms import ModelForm
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
 from .models import Task
-from datetime import date
 from django.core.exceptions import ValidationError
 from django.utils.translation import gettext_lazy as _
+
+from datetime import date
+import logging
+logger = logging.getLogger(__name__)
 # Reordering Form and View
 
 
@@ -49,12 +52,14 @@ class TaskForm(forms.ModelForm):
             'deadline': 'Крайний срок',
         }
 
+
 class CreateTaskForm(TaskForm):
     def clean_deadline(self):
         data = self.cleaned_data["deadline"]
         if data and data < date.today():
             raise ValidationError(_("Неправильная дата - крайний срок не может быть в прошлом"))
         return data
+
 
 class UpdateTaskForm(TaskForm):
     def clean_deadline(self):
@@ -64,8 +69,7 @@ class UpdateTaskForm(TaskForm):
             if current_date:
                 current_date = current_date.date()
                 today = date.today()
-                if current_date < today and data< current_date:
-                    raise ValidationError(_("Неправильная дата - крайний срок не может быть раньше текущего"))
-                elif data < today:
+                logger.info(f'{data}/{current_date}/{today}')
+                if current_date != data and data < today:
                     raise ValidationError(_("Неправильная дата - крайний срок не может быть в прошлом"))
         return data   
