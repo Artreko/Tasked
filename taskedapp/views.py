@@ -14,7 +14,6 @@ from django.views import View
 from django.shortcuts import redirect
 from django.db import transaction
 
-
 from datetime import date
 from operator import attrgetter
 import logging
@@ -60,6 +59,7 @@ class TaskList(LoginRequiredMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['tasks'] = context['tasks'].filter(user=self.request.user)
+        uncompleted_tasks = context['tasks'].filter(complete=False)
         completed_tasks = context['tasks'].filter(complete=True)
         uncompleted_tasks = context['tasks'].filter(complete=False)
         context['count'] = uncompleted_tasks.count()
@@ -74,7 +74,7 @@ class TaskList(LoginRequiredMixin, ListView):
                 tasks_no_deadline.append(task)
                 uncompleted_tasks.pop(idx)
                 idx -= 1
-            idx += 1    
+            idx += 1
         logger.debug(f'{uncompleted_tasks}, {tasks_no_deadline}')
         uncompleted_tasks = sorted(uncompleted_tasks, key=attrgetter('deadline'))
         context['danger'] = [task for task in uncompleted_tasks 
@@ -87,7 +87,7 @@ class TaskCreate(LoginRequiredMixin, CreateView):
     model = Task
     form_class = CreateTaskForm
     success_url = reverse_lazy('tasks')
-    
+
     def form_valid(self, form):
         form.instance.user = self.request.user
         return super(TaskCreate, self).form_valid(form)
@@ -97,21 +97,17 @@ class TaskEdit(LoginRequiredMixin, UpdateView):
     form_class = UpdateTaskForm
     # fields = ['title', 'description', 'complete', 'deadline']
     success_url = reverse_lazy('tasks')
-    raise_exeception = True
 
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
-    
+
 
 class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
-    raise_exeception = True
 
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
-
-    
