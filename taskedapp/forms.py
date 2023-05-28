@@ -34,6 +34,7 @@ class TaskForm(forms.ModelForm):
                 'class': 'task-title-input',
                 'type': 'text',
                 'placeholder': 'Название',
+                'maxlength': '20',
                 }
             ),
             'deadline': forms.DateInput(format='%Y-%m-%d', attrs={
@@ -65,9 +66,7 @@ class UpdateTaskForm(TaskForm):
         data = self.cleaned_data["deadline"]
         if data:
             current_date = self.instance.deadline
-            if current_date:
-                current_date = current_date.date()
-            else:
+            if not current_date:
                 current_date = date.today()
             today = date.today()
             logger.info(f'{data}/{current_date}/{today}')

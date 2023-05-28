@@ -78,7 +78,7 @@ class TaskList(LoginRequiredMixin, ListView):
         logger.debug(f'{uncompleted_tasks}, {tasks_no_deadline}')
         uncompleted_tasks = sorted(uncompleted_tasks, key=attrgetter('deadline'))
         context['danger'] = [task for task in uncompleted_tasks 
-                                if task.deadline and task.deadline.date() <= date.today()]
+                                if task.deadline and task.deadline <= date.today()]
         context['tasks'] = [*uncompleted_tasks, *tasks_no_deadline, *completed_tasks]
         return context
 
