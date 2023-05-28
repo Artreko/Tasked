@@ -65,9 +65,7 @@ class UpdateTaskForm(TaskForm):
         data = self.cleaned_data["deadline"]
         if data:
             current_date = self.instance.deadline
-            if current_date:
-                current_date = current_date.date()
-            else:
+            if not current_date:
                 current_date = date.today()
             today = date.today()
             logger.info(f'{data}/{current_date}/{today}')

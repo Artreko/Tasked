@@ -1,4 +1,4 @@
-{% extends 'taskedapp/main.html' %}
+{% extends "taskedapp/main.html" %}
 {% block content %}
 {% load static %}
 
@@ -6,7 +6,7 @@
     <div class="reg_content">
         <h3 class="auth_title">Регистрация</h3>
         <div class="card-body user_data_unit">
-            <form method="POST">
+            <form method="post">
                 {% csrf_token %}
                 {% for field in form %}
                     <div class="user_data_title">

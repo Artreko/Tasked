@@ -1,3 +1,6 @@
+from typing import Any
+from django.forms.models import BaseModelForm
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, redirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
@@ -6,7 +9,7 @@ from django.urls import reverse_lazy
 
 from django.contrib.auth.views import LoginView
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login
 
 # Imports for Reordering Feature
@@ -30,6 +33,10 @@ class CustomLoginView(LoginView):
     required_css_class = "field"
     redirect_authenticated_user = True
 
+    def form_valid(self, form: AuthenticationForm) -> HttpResponse:
+        logger.info(f'{form.get_user()} "SIGNED IN" [{self.request.headers["User-Agent"]} ({self.request.headers["Sec-Ch-Ua"]})]')
+        return super().form_valid(form)
+    
     # def get_success_url(self):
     #     return reverse_lazy('tasks')
 
@@ -44,6 +51,7 @@ class RegisterPage(FormView):
         user = form.save()
         if user is not None:
             login(self.request, user)
+        logger.info(f'"REGISTER" {self.request.user}')
         return super(RegisterPage, self).form_valid(form)
 
     def get(self, *args, **kwargs):
@@ -78,7 +86,7 @@ class TaskList(LoginRequiredMixin, ListView):
         logger.debug(f'{uncompleted_tasks}, {tasks_no_deadline}')
         uncompleted_tasks = sorted(uncompleted_tasks, key=attrgetter('deadline'))
         context['danger'] = [task for task in uncompleted_tasks 
-                                if task.deadline and task.deadline.date() <= date.today()]
+                                if task.deadline and task.deadline <= date.today()]
         context['tasks'] = [*uncompleted_tasks, *tasks_no_deadline, *completed_tasks]
         return context
 
@@ -90,7 +98,13 @@ class TaskCreate(LoginRequiredMixin, CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        return super(TaskCreate, self).form_valid(form)
+        result = super(TaskCreate, self).form_valid(form)
+        logger.info(f'"TASK CREATED" {self.request.user} {form.instance.pk}')
+        return result
+    
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        logger.info(f'"TASK CREATE" {self.request.user}')
+        return super().get(request, *args, **kwargs)
 
 
 class TaskEdit(LoginRequiredMixin, UpdateView):
@@ -99,6 +113,14 @@ class TaskEdit(LoginRequiredMixin, UpdateView):
     # fields = ['title', 'description', 'complete', 'deadline']
     success_url = reverse_lazy('tasks')
 
+    def form_valid(self, form: BaseModelForm) -> HttpResponse:
+        logger.info(f'"TASK EDITED" {self.request.user} {form.instance.pk}')
+        return super().form_valid(form)
+    
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        logger.info(f'"TASK EDIT" {self.request.user} {request.path.split("/")[-2]}')
+        return super().get(request, *args, **kwargs)
+    
     def get_queryset(self):
         owner = self.request.user
         return self.model.objects.filter(user=owner)
@@ -108,6 +130,14 @@ class TaskDelete(LoginRequiredMixin, DeleteView):
     model = Task
     context_object_name = 'task'
     success_url = reverse_lazy('tasks')
+
+    def post(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        logger.info(f'"TASK DELETED" {self.request.user} {request.path.split("/")[-2]}')
+        return super().post(request, *args, **kwargs)
+    
+    def get(self, request: HttpRequest, *args: str, **kwargs: Any) -> HttpResponse:
+        logger.info(f'"TASK DELETE" {self.request.user} {request.path.split("/")[-2]}')
+        return super().get(request, *args, **kwargs)
 
     def get_queryset(self):
         owner = self.request.user
