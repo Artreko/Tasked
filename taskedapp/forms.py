@@ -34,6 +34,7 @@ class TaskForm(forms.ModelForm):
                 'class': 'task-title-input',
                 'type': 'text',
                 'placeholder': 'Название',
+                'maxlength': '20',
                 }
             ),
             'deadline': forms.DateInput(format='%Y-%m-%d', attrs={
