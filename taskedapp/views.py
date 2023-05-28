@@ -34,7 +34,7 @@ class CustomLoginView(LoginView):
     redirect_authenticated_user = True
 
     def form_valid(self, form: AuthenticationForm) -> HttpResponse:
-        logger.info(f'{form.get_user()} "SIGNED IN" [{self.request.headers["User-Agent"]} ({self.request.headers["Sec-Ch-Ua"]})]')
+        logger.info(f'{form.get_user()} "SIGNED IN" [{self.request.headers["User-Agent"]}]')
         return super().form_valid(form)
     
     # def get_success_url(self):

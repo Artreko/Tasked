@@ -28,7 +28,7 @@ class EncyptedCharField(CharField):
             return value
         if value is None:
             return value
-        print(value)
+        # print(value)
         # decrypt data with your own function
         return value
 
@@ -58,7 +58,7 @@ class EncyptedTextField(CharField):
             return value
         if value is None:
             return ''
-        print(value)
+        # print(value)
         return value
 
 

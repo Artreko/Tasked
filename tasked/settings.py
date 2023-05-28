@@ -34,7 +34,7 @@ SECRET_KEY = config['SECRET_KEY']
 DEBUG = False
 
 # ALLOWED_HOSTS = []
-ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '*']
 
 
 
@@ -184,7 +184,7 @@ LOGGING = {
             'level': 'INFO',
             'class': 'logging.handlers.RotatingFileHandler',
             'formatter': 'custom',
-            'filename': 'src/log.log',
+            'filename': 'tasked/log.log',
             'backupCount': 5,
             'encoding': 'utf-8',
             'maxBytes': 10000,
