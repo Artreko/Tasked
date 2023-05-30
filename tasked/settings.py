@@ -31,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = config['SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 # ALLOWED_HOSTS = []
 ALLOWED_HOSTS = ['.localhost', '127.0.0.1', '*']
@@ -147,7 +147,7 @@ AUTO_LOGOUT_TIME = int(config['AUTO_LOGOUT_TIME'])
 
 AUTO_LOGOUT = {
     'IDLE_TIME': AUTO_LOGOUT_TIME,
-    'MESSAGE': 'The session has expired. Please login again to continue.',
+    'MESSAGE': 'Сессия окончена из-за длительного бездействия. Пожалуйста авторизируйтесь заново.',
     'REDIRECT_TO_LOGIN_IMMEDIATELY': True,
 }
 

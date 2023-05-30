@@ -22,6 +22,12 @@ class SignupForm(UserCreationForm):
             'username': 'Логин'
         }
 
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        if User.objects.filter(email=email).exists():
+            raise ValidationError(_("Данный email уже зарегистрирован."))
+        return email
+
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -69,7 +75,7 @@ class UpdateTaskForm(TaskForm):
             if not current_date:
                 current_date = date.today()
             today = date.today()
-            logger.info(f'{data}/{current_date}/{today}')
+            logger.debug(f'{data}/{current_date}/{today}')
             if current_date != data and data < today:
                 raise ValidationError(_("Неправильная дата - крайний срок не может быть в прошлом"))
-        return data   
+        return data
